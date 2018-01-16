@@ -73,7 +73,7 @@ class PostTypeArchiveMapping {
 			return;
 		}
 		foreach( $post_types as $post_type => $post_id ) {
-			if ( is_post_type_archive( $post_type ) ) {
+			if ( is_post_type_archive( $post_type ) && 'default' != $post_id ) {
 				$query->set( 'post_type', 'page' );
 				$query->set( 'page_id', $post_id );
 				$query->is_archive = false;
