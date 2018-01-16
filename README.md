@@ -16,8 +16,6 @@ Features
 
 Your post types need to have `has_archive` set to true.
 
-Advanced customization is allowed via hooks.  See the Plugin Filters section.
-
 Installation
 ---------------------
 Go to Settings->Reading. At the bottom you will see a place to map your post types.
