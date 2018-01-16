@@ -14,8 +14,6 @@ Domain Path: /languages
 
 class PostTypeArchiveMapping {
 	private static $instance = null;
-	private $options = false;
-	private $errors = false;
 		
 	/**
 	 * Return an instance of the class
