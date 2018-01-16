@@ -107,7 +107,7 @@ class PostTypeArchiveMapping {
 			_x( 'Post Type Archive Mapping', 'post-type-archive-mapping' ), 
 			array( $this, 'add_settings_post_types' ), 
 			'reading', 
-			'post-type-archive-mapping', 
+			'post-type-archive-mapping'
 		);
 		
 	}
