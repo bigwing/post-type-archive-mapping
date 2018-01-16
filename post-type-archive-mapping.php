@@ -83,7 +83,6 @@ class PostTypeArchiveMapping {
 				$query->is_post_type_archive = false;		
 			}
 		}
-		//die( '<pre>' . print_r( $query, true ) );
 	}
 	
 	/**
