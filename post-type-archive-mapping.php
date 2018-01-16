@@ -78,9 +78,12 @@ class PostTypeArchiveMapping {
 				$query->set( 'post_type', 'page' );
 				$query->set( 'page_id', $post_id );
 				$query->is_archive = false;
-				$query->is_single = true;			
+				$query->is_single = true;
+				$query->is_singular = true;
+				$query->is_post_type_archive = false;		
 			}
 		}
+		//die( '<pre>' . print_r( $query, true ) );
 	}
 	
 	/**
