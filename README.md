@@ -12,6 +12,10 @@ Features
 <li>Use page templates on your pages for flexibility.</li>
 </ul>
 
+## Note
+
+Your post types need to have `has_archive` set to true.
+
 Advanced customization is allowed via hooks.  See the Plugin Filters section.
 
 Installation
