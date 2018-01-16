@@ -20,12 +20,12 @@ class PostTypeArchiveMapping {
 	/**
 	 * Return an instance of the class
 	 *
-	 * Return an instance of the Highlight and Share Class.
+	 * Return an instance of the PostTypeArchiveMapping Class.
 	 *
 	 * @since 1.0.0
 	 * @access public static
 	 *
-	 * @return Highlight_And_Share class instance.
+	 * @return PostTypeArchiveMapping class instance.
 	 */
 	public static function get_instance() {
 		if ( null == self::$instance ) {
@@ -110,7 +110,7 @@ class PostTypeArchiveMapping {
 			array( $this, 'add_settings_post_types' ), 
 			'reading', 
 			'post-type-archive-mapping', 
-			array( 'label_for' => 'hightlight-and-share-js-content', 'desc' => __( 'Enter jQuery classes to search for in the HTML.  You must comma-separate classes (e.g., entry-content,post,page).', 'add_settings_post_types' ) ) );
+		);
 		
 	}
 	
@@ -163,33 +163,8 @@ class PostTypeArchiveMapping {
 	 */
 	public function settings_section() {
 	}
-	
-	/**
-	 * Sanitize options before they are saved.
-	 *
-	 * Sanitize and prepare error messages when saving options.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @see init_admin_settings
-	 *
-	 * @param array $input {
-	 		@type string $js_content Content to be parsed via Javascript.  Default 'entry-content'.
-	
-	 		@type string $twitter Twitter username.  Default ''.
-	 		@type bool $show_twitter Whether to show twitter share option.  Default true.
-	 		@type bool $show_facebook Whether to show facebook share option.  Default true
-	 }
-	 * @return array Sanitized array of options
-	 */
-	public function sanitization( $input = array() ) {
-		$output = get_option( 'post-type-archive-mapping', array() );
 		
-		return $input;
-	}
-		
-} //end class Highlight_And_Share
+}
 
 add_action( 'plugins_loaded', function() {
 	PostTypeArchiveMapping::get_instance();
