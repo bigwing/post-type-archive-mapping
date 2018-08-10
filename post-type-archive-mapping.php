@@ -14,7 +14,9 @@ Domain Path: /languages
 
 class PostTypeArchiveMapping {
 	private static $instance = null;
-		
+	private $paged = null;
+	private $paged_reset = false;
+
 	/**
 	 * Return an instance of the class
 	 *
@@ -43,10 +45,8 @@ class PostTypeArchiveMapping {
 	 */
 	private function __construct() {
 		add_action( 'init', array( $this, 'init' ), 9 );
-		
 	} //end constructor
 
-	
 	/**
 	 * Main plugin initialization
 	 *
@@ -59,28 +59,42 @@ class PostTypeArchiveMapping {
 	 *
 	 */
 	public function init() {
-				
 		//Admin Settings
 		add_action( 'admin_init', array( $this, 'init_admin_settings' ) );
-		
 		add_action( 'pre_get_posts', array( $this, 'maybe_override_archive' ) );
-			
 	} //end init
 	
 	public function maybe_override_archive( $query ) {
+		// trigger this once after running the main query.
+		if ( true === $this->paged_reset ) {
+			$query->set( 'paged', $this->paged );
+			set_query_var( 'paged', $this->paged );
+
+			$this->paged_reset = false;
+		}
+
 		$post_types = get_option( 'post-type-archive-mapping', array() );
 		if ( empty( $post_types ) || is_admin() ) {
 			return;
 		}
+
+		// trigger this the first time to get the current page.
+		if ( is_null( $this->paged ) ) {
+			$this->paged = get_query_var( 'paged' );
+		}
+
 		foreach( $post_types as $post_type => $post_id ) {
-			if ( is_post_type_archive( $post_type ) && 'default' != $post_id ) {
+			if ( is_post_type_archive( $post_type ) && 'default' != $post_id && $query->is_main_query() ) {
 				$post_id = absint( $post_id );
 				$query->set( 'post_type', 'page' );
 				$query->set( 'page_id', $post_id );
+				$query->set( 'paged', '0' );
 				$query->is_archive = false;
 				$query->is_single = true;
 				$query->is_singular = true;
-				$query->is_post_type_archive = false;		
+				$query->is_post_type_archive = false;
+
+				$this->paged_reset = true;
 			}
 		}
 	}
